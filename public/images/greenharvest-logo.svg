@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title">
+  <title id="title">GreenHarvest Growers</title>
+  <rect width="96" height="96" rx="20" fill="#edf7ed"/>
+  <path d="M48 77c-1-23 6-42 26-55 4 24-4 43-26 55Z" fill="#36834a"/>
+  <path d="M48 76C45 51 32 36 17 29c-5 23 7 41 31 47Z" fill="#6daf68"/>
+  <path d="M48 80V48m0 18L30 43m19 14 15-19" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="4"/>
+</svg>

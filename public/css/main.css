@@ -1,0 +1,240 @@
+/* ==========================================================
+   CSE 340 Service Network - main stylesheet
+   Mobile first: base styles are for phones, then a media
+   query at the bottom adds changes for wider screens.
+   ========================================================== */
+
+/* ---------- 1. Design tokens (colors, fonts, spacing) ----------
+   Stored as CSS variables so a color can be changed in one place. */
+:root {
+    --color-navy: #14365d;        /* header, footer, headings */
+    --color-navy-dark: #0d2540;   /* footer background */
+    --color-blue: #0b5cab;        /* links */
+    --color-blue-hover: #084480;
+    --color-accent: #f2b134;      /* focus ring and accents */
+    --color-text: #1f2933;        /* main text */
+    --color-muted: #52606d;       /* secondary text */
+    --color-bg: #f4f7fa;          /* page background */
+    --color-surface: #ffffff;     /* cards */
+    --color-border: #d5dde5;
+
+    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --radius: 10px;
+    --shadow: 0 2px 8px rgba(20, 54, 93, 0.12);
+    --page-width: 960px;
+}
+
+/* ---------- 2. Base / reset ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;   /* padding does not add to an element's width */
+}
+
+html {
+    font-size: 100%;          /* respects the user's browser font setting */
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;            /* lets the footer stay at the bottom */
+    flex-direction: column;
+    font-family: var(--font-body);
+    font-size: 1.0625rem;     /* about 17px, comfortable to read */
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+img {
+    max-width: 100%;          /* images never overflow the screen */
+    height: auto;
+}
+
+/* ---------- 3. Accessibility helpers ---------- */
+
+/* Skip link: hidden until a keyboard user tabs to it */
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-accent);
+    color: var(--color-text);
+    font-weight: bold;
+    border-radius: 0 0 var(--radius) var(--radius);
+    z-index: 10;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Clear focus outline for keyboard users */
+a:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+/* ---------- 4. Header and navigation ---------- */
+.site-header {
+    background-color: var(--color-navy);
+    color: #ffffff;
+    padding: 1rem 1.25rem;
+}
+
+.site-name {
+    margin: 0 0 0.5rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+}
+
+.site-header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;          /* links wrap onto a new line on small screens */
+    gap: 0.25rem 0.5rem;
+}
+
+.site-header nav a {
+    display: block;
+    padding: 0.5rem 0.9rem;   /* big enough to tap with a finger */
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.site-header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    text-decoration: underline;
+}
+
+/* ---------- 5. Main content ---------- */
+main {
+    flex: 1;                  /* pushes the footer down on short pages */
+    width: 100%;
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 2.5rem;
+}
+
+h1,
+h2 {
+    color: var(--color-navy);
+    line-height: 1.25;
+}
+
+h1 {
+    font-size: 1.9rem;
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 4px solid var(--color-accent);
+}
+
+h2 {
+    font-size: 1.4rem;
+    margin-top: 1.75rem;
+}
+
+a {
+    color: var(--color-blue);
+}
+
+a:hover {
+    color: var(--color-blue-hover);
+}
+
+.main-logo {
+    display: block;
+    max-width: 320px;
+    margin: 1.5rem 0;
+}
+
+/* ---------- 6. Lists shown as cards ---------- */
+.org-list,
+.project-list,
+.category-list {
+    list-style: none;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;                /* one column on phones */
+}
+
+.org-list li,
+.project-list li,
+.category-list li {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem 1.25rem;
+}
+
+.org-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.org-list img {
+    flex: none;
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+
+.category-list li {
+    font-weight: bold;
+    color: var(--color-navy);
+    border-left: 6px solid var(--color-accent);
+}
+
+/* ---------- 7. Footer ---------- */
+footer {
+    background-color: var(--color-navy-dark);
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem 1.25rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ---------- 8. Larger screens (tablet and desktop) ---------- */
+@media (min-width: 700px) {
+    .site-header {
+        display: flex;                 /* site name on the left, nav on the right */
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+    }
+
+    .site-name {
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 2.3rem;
+    }
+
+    /* two columns of cards */
+    .project-list,
+    .category-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ---------- 9. Respect users who turn off animations ---------- */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}

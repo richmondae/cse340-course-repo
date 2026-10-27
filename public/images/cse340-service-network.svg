@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" role="img" aria-labelledby="title">
+  <title id="title">CSE 340 Service Network</title>
+  <rect width="480" height="160" rx="20" fill="#14365d"/>
+  <circle cx="82" cy="80" r="48" fill="#f2b134"/>
+  <path d="M82 112V67m0 18c-22 0-30-15-30-31 18 0 30 10 30 31Zm0-9c0-19 11-31 30-34 0 20-10 34-30 34Z" fill="none" stroke="#14365d" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"/>
+  <text x="150" y="73" fill="#fff" font-family="system-ui, sans-serif" font-size="28" font-weight="700">CSE 340</text>
+  <text x="150" y="108" fill="#eaf1f8" font-family="system-ui, sans-serif" font-size="20">Service Network</text>
+</svg>

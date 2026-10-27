@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title">
+  <title id="title">BrightFuture Builders</title>
+  <rect width="96" height="96" rx="20" fill="#eaf4ff"/>
+  <path d="M48 16 76 39v39H20V39l28-23Z" fill="#1769aa"/>
+  <path d="M39 78V54h18v24M30 43h12v11H30zm24 0h12v11H54z" fill="#fff"/>
+  <path d="M48 7v9m34 23-8 5M14 39l8 5" stroke="#f2b134" stroke-linecap="round" stroke-width="5"/>
+</svg>
