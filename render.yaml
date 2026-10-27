@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: cse340-service-network
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
