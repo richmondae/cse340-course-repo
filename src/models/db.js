@@ -6,7 +6,11 @@ if (!process.env.DB_URL) {
 
 const pool = new Pool({
     connectionString: process.env.DB_URL,
-    ssl: true
+    // Render's private Postgres network uses a self-signed certificate.
+    // Keep certificate validation enabled for local external connections.
+    ssl: process.env.RENDER === 'true'
+        ? { rejectUnauthorized: false }
+        : true
 });
 
 let db = pool;
