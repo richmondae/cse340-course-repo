@@ -9,7 +9,7 @@
             <li>
                 <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
                 <span>
-                    <strong><%= organization.name %></strong><br>
+                    <strong><a href="/organization/<%= organization.organization_id %>"><%= organization.name %></a></strong><br>
                     <%= organization.description %><br>
                     <a href="mailto:<%= organization.contact_email %>"><%= organization.contact_email %></a>
                 </span>

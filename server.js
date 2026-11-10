@@ -1,59 +1,58 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import router from './src/routes.js';
 import { testConnection } from './src/models/db.js';
-import { getAllOrganizations } from './src/models/organizations.js';
-import { getAllProjects } from './src/models/projects.js';
-import { getAllCategories } from './src/models/categories.js';
 
-// Define the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
-
-// Define the port number the server will listen on
 const PORT = process.env.PORT || 3000;
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 
-/**
- * Configure Express middleware
- */
-
-// Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Set EJS as the templating engine
 app.set('view engine', 'ejs');
-
-// Tell Express where to find your templates
 app.set('views', path.join(__dirname, 'src/views'));
 
-/**
- * Routes
- */
-app.get('/', async (req, res) => {
-    const title = 'Home';
-    res.render('home', { title });
+// Log requests during development and make the environment available to EJS.
+app.use((req, res, next) => {
+    if (NODE_ENV === 'development') {
+        console.log(`${req.method} ${req.url}`);
+    }
+    next();
 });
 
-app.get('/organizations', async (req, res) => {
-    const organizations = await getAllOrganizations();
-    const title = 'Our Partner Organizations';
-    res.render('organizations', { title, organizations });
+app.use((req, res, next) => {
+    res.locals.NODE_ENV = NODE_ENV;
+    next();
 });
 
-app.get('/projects', async (req, res) => {
-    const projects = await getAllProjects();
-    const title = 'Service Projects';
-    res.render('projects', { title, projects });
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', router);
+
+// Unmatched requests become 404 errors and use the same handler as other errors.
+app.use((req, res, next) => {
+    const error = new Error('Page Not Found');
+    error.status = 404;
+    next(error);
 });
 
-app.get('/categories', async (req, res) => {
-    const categories = await getAllCategories();
-    const title = 'Service Project Categories';
-    res.render('categories', { title, categories });
+// Centralized error handler for missing pages and unexpected server errors.
+app.use((error, req, res, next) => {
+    console.error('Error occurred:', error.message);
+    console.error('Stack trace:', error.stack);
+
+    if (res.headersSent) {
+        return next(error);
+    }
+
+    const status = error.status === 404 ? 404 : 500;
+    const template = status === 404 ? 'errors/404' : 'errors/500';
+    res.status(status).render(template, {
+        title: status === 404 ? 'Page Not Found' : 'Server Error',
+        error: error.message,
+        stack: error.stack
+    });
 });
 
 const startServer = async () => {

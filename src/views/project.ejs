@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<main id="main-content" class="detail-page">
+    <h1><%= projectDetails.title %></h1>
+    <p><%= projectDetails.description %></p>
+    <dl class="detail-list">
+        <dt>Date</dt>
+        <dd><%= projectDetails.formatted_date %></dd>
+        <dt>Location</dt>
+        <dd><%= projectDetails.location %></dd>
+        <dt>Organization</dt>
+        <dd><a href="/organization/<%= projectDetails.organization_id %>"><%= projectDetails.organization_name %></a></dd>
+    </dl>
+
+    <h2>Categories</h2>
+    <% if (categories.length > 0) { %>
+        <ul class="tag-list" aria-label="Project categories">
+            <% categories.forEach((category) => { %>
+                <li><a href="/category/<%= category.category_id %>"><%= category.name %></a></li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>No categories have been assigned to this project.</p>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>
