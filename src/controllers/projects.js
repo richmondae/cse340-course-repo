@@ -1,11 +1,9 @@
-import { getUpcomingProjects, getProjectDetails } from '../models/projects.js';
+import { getAllProjects, getProjectDetails } from '../models/projects.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
 
-const NUMBER_OF_UPCOMING_PROJECTS = 5;
-
 const showProjectsPage = async (req, res) => {
-    const projects = await getUpcomingProjects(NUMBER_OF_UPCOMING_PROJECTS);
-    res.render('projects', { title: 'Upcoming Service Projects', projects });
+    const projects = await getAllProjects();
+    res.render('projects', { title: 'Service Projects', projects });
 };
 
 const showProjectDetailsPage = async (req, res) => {
