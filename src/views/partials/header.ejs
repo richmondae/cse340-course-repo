@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
+    <% const flashMessages = flash(); %>
+    <% Object.entries(flashMessages).forEach(([type, messages]) => { %>
+        <% messages.forEach((message) => { %>
+            <p class="flash-message flash-<%= type %>" role="<%= type === 'error' ? 'alert' : 'status' %>"><%= message %></p>
+        <% }) %>
+    <% }) %>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header">
         <p class="site-name">CSE 340 Service Network</p>

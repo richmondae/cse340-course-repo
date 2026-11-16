@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+<main id="main-content" class="form-page">
+    <h1><%= title %></h1>
+    <form method="post" action="<%= project.project_id ? `/edit-project/${project.project_id}` : '/new-project' %>">
+        <label for="title">Project title</label>
+        <input id="title" name="title" type="text" value="<%= project.title || '' %>" maxlength="200" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5" maxlength="1000" required><%= project.description || '' %></textarea>
+
+        <label for="location">Location</label>
+        <input id="location" name="location" type="text" value="<%= project.location || '' %>" maxlength="200" required>
+
+        <label for="project_date">Date</label>
+        <input id="project_date" name="project_date" type="date" value="<%= project.project_date || project.date || '' %>" required>
+
+        <label for="organization_id">Sponsoring organization</label>
+        <select id="organization_id" name="organization_id" required>
+            <option value="">Choose an organization</option>
+            <% organizations.forEach((organization) => { %>
+                <option value="<%= organization.organization_id %>" <%= String(project.organization_id || '') === String(organization.organization_id) ? 'selected' : '' %>><%= organization.name %></option>
+            <% }) %>
+        </select>
+
+        <fieldset>
+            <legend>Categories</legend>
+            <% allCategories.forEach((category) => { %>
+                <label class="checkbox-label"><input type="checkbox" name="categoryIds" value="<%= category.category_id %>" <%= categories.map(String).includes(String(category.category_id)) ? 'checked' : '' %>> <%= category.name %></label>
+            <% }) %>
+        </fieldset>
+        <div class="form-actions">
+            <button type="submit"><%= project.project_id ? 'Save project' : 'Create project' %></button>
+            <a href="/projects">Cancel</a>
+        </div>
+    </form>
+</main>
+<%- include('partials/footer') %>

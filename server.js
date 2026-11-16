@@ -1,8 +1,11 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import session from 'express-session';
+import { randomBytes } from 'crypto';
 import router from './src/routes.js';
 import { testConnection } from './src/models/db.js';
+import flashMiddleware from './src/middleware/flash.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 const PORT = process.env.PORT || 3000;
@@ -13,6 +16,15 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
+app.set('trust proxy', 1);
+app.use(express.urlencoded({ extended: false }));
+app.use(session({
+    secret: process.env.SESSION_SECRET || randomBytes(32).toString('hex'),
+    resave: false,
+    saveUninitialized: false,
+    cookie: { httpOnly: true, sameSite: 'lax', secure: NODE_ENV === 'production', maxAge: 1000 * 60 * 60 }
+}));
+app.use(flashMiddleware);
 
 // Log requests during development and make the environment available to EJS.
 app.use((req, res, next) => {

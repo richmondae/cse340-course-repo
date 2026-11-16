@@ -89,4 +89,24 @@ const getProjectsByOrganizationId = async (organizationId) => {
     return result.rows;
 };
 
-export { getAllProjects, getUpcomingProjects, getProjectDetails, getProjectsByOrganizationId };
+const createProject = async (title, description, location, date, organizationId) => {
+    const inserted = await db.query(`
+        INSERT INTO public.project (title, description, location, project_date, organization_id)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING project_id;
+    `, [title, description, location, date, organizationId]);
+    return inserted.rows[0].project_id;
+};
+
+const updateProject = async (id, title, description, location, date, organizationId) => {
+    const updated = await db.query(`
+        UPDATE public.project
+        SET title = $1, description = $2, location = $3, project_date = $4, organization_id = $5
+        WHERE project_id = $6
+        RETURNING project_id;
+    `, [title, description, location, date, organizationId, id]);
+    if (!updated.rows[0]) return null;
+    return updated.rows[0].project_id;
+};
+
+export { getAllProjects, getUpcomingProjects, getProjectDetails, getProjectsByOrganizationId, createProject, updateProject };

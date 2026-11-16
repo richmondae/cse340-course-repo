@@ -8,11 +8,11 @@ A small Express and EJS site for community service projects, partner organizatio
 2. Copy `.env.example` to `.env` and set `DB_URL` to the PostgreSQL database's External Database URL.
 3. Run `npm run dev` and open `http://localhost:3000`.
 
-The app uses Express routes, controllers, database models, and EJS views. It includes organization, project, and category detail pages. Static CSS and images are served from `public/`. In development, `/test-error` can be used to view the custom 500 page.
+The app uses Express routes, controllers, database models, EJS views, session-based flash messages, and server-side form validation. It includes create and edit forms for organizations, projects, and categories, plus a page for assigning categories to projects. Static CSS and images are served from `public/`. In development, `/test-error` can be used to view the custom 500 page.
 
 ## Deploy to Render
 
-The Render web service builds with `npm install` and starts with `npm start`. Set `DB_URL` in the service's environment to the PostgreSQL database's Internal Database URL. Keep database credentials out of GitHub.
+The Render web service builds with `npm install` and starts with `npm start`. Set `DB_URL` in the service's environment to the PostgreSQL database's Internal Database URL, and set `SESSION_SECRET` to a long random value. Keep database credentials and session secrets out of GitHub.
 
 ## Week 2 database setup
 

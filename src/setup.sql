@@ -37,7 +37,7 @@ WHERE organization.name = seed.name;
 CREATE TABLE IF NOT EXISTS public.project (
     project_id SERIAL PRIMARY KEY,
     organization_id INTEGER NOT NULL,
-    title VARCHAR(150) NOT NULL,
+    title VARCHAR(200) NOT NULL,
     description TEXT NOT NULL,
     location VARCHAR(200) NOT NULL,
     project_date DATE NOT NULL,
@@ -47,6 +47,9 @@ CREATE TABLE IF NOT EXISTS public.project (
         ON DELETE CASCADE,
     CONSTRAINT project_organization_title_unique UNIQUE (organization_id, title)
 );
+
+-- Keep existing Week 2 databases compatible with the Week 4 project title validation.
+ALTER TABLE public.project ALTER COLUMN title TYPE VARCHAR(200);
 
 -- Five sample projects for each of the three partner organizations.
 WITH sample_projects (organization_name, title, description, location, project_date) AS (

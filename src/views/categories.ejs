@@ -4,9 +4,10 @@
     <h1><%= title %></h1>
 
     <p>Browse service projects by the kind of work they involve:</p>
+    <p><a class="button-link" href="/new-category">Add a category</a></p>
     <ul class="category-list">
         <% categories.forEach((category) => { %>
-            <li><a href="/category/<%= category.category_id %>"><%= category.name %></a></li>
+            <li><a href="/category/<%= category.category_id %>"><%= category.name %></a> <a class="small-action" href="/edit-category/<%= category.category_id %>">Edit</a></li>
         <% }) %>
     </ul>
 </main>

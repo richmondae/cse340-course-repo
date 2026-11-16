@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+<main id="main-content" class="form-page">
+    <h1><%= title %></h1>
+    <form method="post" action="<%= category.category_id ? `/edit-category/${category.category_id}` : '/new-category' %>">
+        <label for="name">Category name</label>
+        <input id="name" name="name" type="text" value="<%= category.name || '' %>" maxlength="100" required autocomplete="off">
+        <p class="field-hint">Required. Maximum 100 characters.</p>
+        <div class="form-actions">
+            <button type="submit"><%= category.category_id ? 'Save category' : 'Create category' %></button>
+            <a href="/categories">Cancel</a>
+        </div>
+    </form>
+</main>
+<%- include('partials/footer') %>
