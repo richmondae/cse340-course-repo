@@ -14,7 +14,7 @@ const organizationValidation = [
 ];
 
 const organizationForm = (res, { title, organization = {}, errors = [], status = 200 }) =>
-    res.status(status).render('organization-form', { title, organization, errors });
+    res.status(status).render(organization.organization_id ? 'edit-organization' : 'new-organization', { title, organization, errors });
 
 const showOrganizationsPage = async (req, res) => {
     const organizations = await getAllOrganizations();

@@ -105,7 +105,11 @@ const updateProject = async (id, title, description, location, date, organizatio
         WHERE project_id = $6
         RETURNING project_id;
     `, [title, description, location, date, organizationId, id]);
-    if (!updated.rows[0]) return null;
+    if (!updated.rows[0]) {
+        const error = new Error('Service project not found.');
+        error.status = 404;
+        throw error;
+    }
     return updated.rows[0].project_id;
 };
 

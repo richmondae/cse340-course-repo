@@ -14,16 +14,7 @@ const categoryValidation = [
 ];
 
 const categoryForm = (res, { title, category = {}, errors = [], status = 200 }) =>
-    res.status(status).render('category-form', { title, category, errors });
-
-const validateCategory = (input) => {
-    const name = String(input ?? '').trim();
-    const errors = [];
-    if (!name) errors.push('Category name is required.');
-    if (name.length < 3) errors.push('Category name must be at least 3 characters.');
-    if (name.length > 100) errors.push('Category name must be 100 characters or fewer.');
-    return { name, errors };
-};
+    res.status(status).render(category.category_id ? 'edit-category' : 'new-category', { title, category, errors });
 
 const showCategoriesPage = async (req, res) => {
     const categories = await getAllCategories();

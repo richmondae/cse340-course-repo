@@ -26,7 +26,8 @@ const selectedCategoryIds = (input) => {
 
 const renderProjectForm = async (res, { title, project = {}, categories = [], errors = [], status = 200 }) => {
     const [organizations, allCategories] = await Promise.all([getAllOrganizations(), getAllCategories()]);
-    res.status(status).render('project-form', { title, project, organizations, categories, allCategories, errors });
+    const view = project.project_id ? 'update-project' : 'new-project';
+    res.status(status).render(view, { title, project, organizations, categories, allCategories, errors });
 };
 
 const validateProject = (input, organizations, categories) => {
