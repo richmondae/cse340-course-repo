@@ -160,6 +160,60 @@ a:hover {
     box-shadow: var(--shadow);
 }
 
+.form-page button {
+    justify-self: start;
+    min-height: 2.75rem;
+    padding: 0.55rem 1.1rem;
+    color: #fff;
+    background: var(--color-blue);
+    border: 0;
+    border-radius: 6px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.form-page button:hover {
+    background: var(--color-blue-hover);
+}
+
+.dashboard-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0;
+    list-style: none;
+}
+
+.table-scroll {
+    overflow-x: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.data-table th {
+    color: #fff;
+    background: var(--color-navy);
+}
+
+.data-table tbody tr:nth-child(even) {
+    background: #f4f7fa;
+}
+
 .form-page label,
 .form-page legend {
     color: var(--color-navy);

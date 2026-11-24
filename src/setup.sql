@@ -151,3 +151,26 @@ INNER JOIN public.project AS p
 INNER JOIN public.category AS c ON c.name = pc.category_name
 WHERE TRUE
 ON CONFLICT (project_id, category_id) DO NOTHING;
+
+-- Roles used by authentication and role-based authorization.
+CREATE TABLE IF NOT EXISTS public.roles (
+    role_id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL UNIQUE,
+    role_description TEXT
+);
+
+INSERT INTO public.roles (role_name, role_description)
+VALUES
+    ('user', 'Standard user with basic access'),
+    ('admin', 'Administrator with full system access')
+ON CONFLICT (role_name) DO NOTHING;
+
+-- Registered accounts store a bcrypt password hash, never a plain-text password.
+CREATE TABLE IF NOT EXISTS public.users (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role_id INTEGER NOT NULL REFERENCES public.roles (role_id) ON DELETE RESTRICT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

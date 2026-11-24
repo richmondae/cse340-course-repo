@@ -25,6 +25,11 @@ app.use(session({
     cookie: { httpOnly: true, sameSite: 'lax', secure: NODE_ENV === 'production', maxAge: 1000 * 60 * 60 }
 }));
 app.use(flashMiddleware);
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = Boolean(req.session.user);
+    res.locals.user = req.session.user || null;
+    next();
+});
 
 // Log requests during development and make the environment available to EJS.
 app.use((req, res, next) => {

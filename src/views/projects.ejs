@@ -2,7 +2,9 @@
 
 <main id="main-content">
     <h1><%= title %></h1>
-    <p><a class="button-link" href="/new-project">Add a service project</a></p>
+    <% if (user && user.role_name === 'admin') { %>
+        <p><a class="button-link" href="/new-project">Add a service project</a></p>
+    <% } %>
 
     <ul class="project-list">
         <% projects.forEach((project) => { %>

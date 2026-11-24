@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<main id="main-content" class="dashboard-page">
+    <h1>Dashboard</h1>
+    <p>Welcome, <strong><%= user.name %></strong>.</p>
+    <p>You are signed in as <%= user.role_name %>.</p>
+
+    <% if (user.role_name === 'admin') { %>
+        <section aria-labelledby="admin-tools-heading">
+            <h2 id="admin-tools-heading">Administration</h2>
+            <ul class="dashboard-links">
+                <li><a class="button-link" href="/users">View registered users</a></li>
+                <li><a class="button-link" href="/new-organization">Add an organization</a></li>
+                <li><a class="button-link" href="/new-project">Add a service project</a></li>
+                <li><a class="button-link" href="/new-category">Add a category</a></li>
+            </ul>
+        </section>
+    <% } else { %>
+        <p>Your account has standard user access.</p>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>

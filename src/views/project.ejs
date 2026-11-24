@@ -2,8 +2,10 @@
 
 <main id="main-content" class="detail-page">
     <h1><%= projectDetails.title %></h1>
-    <p><a class="button-link" href="/edit-project/<%= projectDetails.project_id %>">Edit project</a></p>
-    <p><a class="button-link" href="/assign-categories/<%= projectDetails.project_id %>">Assign categories</a></p>
+    <% if (user && user.role_name === 'admin') { %>
+        <p><a class="button-link" href="/edit-project/<%= projectDetails.project_id %>">Edit project</a></p>
+        <p><a class="button-link" href="/assign-categories/<%= projectDetails.project_id %>">Assign categories</a></p>
+    <% } %>
     <p><%= projectDetails.description %></p>
     <dl class="detail-list">
         <dt>Date</dt>

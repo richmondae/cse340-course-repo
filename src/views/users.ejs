@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<main id="main-content" class="users-page">
+    <h1>Registered Users</h1>
+    <% if (users.length > 0) { %>
+        <div class="table-scroll" role="region" aria-label="Registered users" tabindex="0">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach((registeredUser) => { %>
+                        <tr>
+                            <td><%= registeredUser.name %></td>
+                            <td><%= registeredUser.email %></td>
+                            <td><%= registeredUser.role_name %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    <% } else { %>
+        <p>No users have registered yet.</p>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>
