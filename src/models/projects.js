@@ -55,6 +55,7 @@ const getProjectDetails = async (id) => {
             p.project_id,
             p.title,
             p.description,
+            TO_CHAR(p.project_date, 'YYYY-MM-DD') AS project_date,
             p.project_date AS date,
             TO_CHAR(p.project_date, 'FMMonth FMDD, YYYY') AS formatted_date,
             p.location,
