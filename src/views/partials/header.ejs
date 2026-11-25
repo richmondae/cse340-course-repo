@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/navigation.js" defer></script>
 </head>
 <body>
     <% const flashMessages = flash(); %>
@@ -15,8 +16,15 @@
     <% }) %>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header">
-        <p class="site-name">CSE 340 Service Network</p>
-        <nav aria-label="Main navigation">
+        <div class="site-header-top">
+            <p class="site-name">CSE 340 Service Network</p>
+            <button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+        </div>
+        <nav class="site-nav" id="primary-navigation" aria-label="Main navigation">
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/organizations">Organizations</a></li>

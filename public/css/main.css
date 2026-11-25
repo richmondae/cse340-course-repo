@@ -84,11 +84,64 @@ a:focus-visible {
     padding: 1rem 1.25rem;
 }
 
+.site-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
 .site-name {
-    margin: 0 0 0.5rem;
+    margin: 0;
     font-size: 1.3rem;
     font-weight: bold;
     letter-spacing: 0.02em;
+}
+
+.site-nav-toggle {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.55rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.28rem;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    color: #ffffff;
+    background: transparent;
+    cursor: pointer;
+}
+
+.site-nav-toggle span {
+    display: block;
+    width: 1.35rem;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.site-nav-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(0.42rem) rotate(45deg);
+}
+
+.site-nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.site-nav-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-0.42rem) rotate(-45deg);
+}
+
+.site-nav-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+.site-nav-toggle:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
 }
 
 .site-header nav ul {
@@ -112,6 +165,27 @@ a:focus-visible {
 .site-header nav a:hover {
     background-color: rgba(255, 255, 255, 0.18);
     text-decoration: underline;
+}
+
+@media (max-width: 699px) {
+    html.js .site-nav-toggle {
+        display: inline-flex;
+    }
+
+    html.js .site-nav:not(.is-open) {
+        display: none;
+    }
+
+    .site-nav {
+        margin-top: 0.75rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .site-header nav ul {
+        flex-direction: column;
+        gap: 0.1rem;
+    }
 }
 
 /* ---------- 5. Main content ---------- */
@@ -469,8 +543,18 @@ footer p {
         padding: 1rem 2rem;
     }
 
-    .site-name {
+    .site-header-top {
+        display: block;
+    }
+
+    .site-nav {
         margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    .site-nav-toggle {
+        display: none;
     }
 
     h1 {
